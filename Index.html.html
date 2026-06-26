@@ -1,0 +1,550 @@
+
+<h2 class="sr-only">Oxi Fresh Carpet Cleaning — Interactive Inbound Call Flow Agent Guide</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.cf{font-family:var(--font-sans);padding:0.5rem 0 1rem}
+.hdr{background:#121b35;border-radius:var(--border-radius-lg);padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.hdr-logo{background:#1e2d4f;border-radius:var(--border-radius-md);padding:6px 10px;display:flex;align-items:center;gap:8px}
+.hdr-logo span{font-size:18px;font-weight:500;color:#fff;letter-spacing:-0.5px}
+.hdr-logo span em{color:#ef4444;font-style:normal}
+.hdr-text{flex:1}
+.hdr-text p{color:#94a3b8;font-size:12px;margin-top:2px}
+.hdr-text h1{color:#fff;font-size:14px;font-weight:500}
+.agent-row{display:flex;align-items:center;gap:8px}
+.agent-row label{color:#94a3b8;font-size:12px;white-space:nowrap}
+.agent-row input{background:#1e2d4f;border:0.5px solid #334155;color:#fff;border-radius:var(--border-radius-md);padding:5px 9px;font-size:13px;width:120px}
+.agent-row input::placeholder{color:#64748b}
+.new-btn{background:transparent;border:0.5px solid #334155;color:#94a3b8;border-radius:var(--border-radius-md);padding:5px 10px;font-size:12px;cursor:pointer}
+.new-btn:hover{background:#1e2d4f}
+.prog{display:flex;gap:0;margin-bottom:12px;border-radius:var(--border-radius-md);overflow:hidden;border:0.5px solid var(--color-border-tertiary)}
+.pstep{flex:1;padding:7px 4px;text-align:center;font-size:11px;cursor:pointer;transition:.2s;color:var(--color-text-secondary);background:var(--color-background-primary);border-right:0.5px solid var(--color-border-tertiary);line-height:1.3}
+.pstep:last-child{border-right:none}
+.pstep.done{background:#e0fdf4;color:#0f6e56}
+.pstep.active{background:#c0392b;color:#fff;font-weight:500}
+.pstep:hover:not(.active){background:var(--color-background-secondary)}
+.pstep .pnum{display:block;font-size:10px;opacity:.7;margin-bottom:1px}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:10px}
+.card-red{border-left:3px solid #c0392b;border-radius:0 var(--border-radius-lg) var(--border-radius-lg) 0;padding-left:14px}
+.slbl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:#c0392b;margin-bottom:4px}
+.sbox{background:#fff8f8;border:0.5px solid #fca5a5;border-radius:var(--border-radius-md);padding:10px 12px;font-style:italic;font-size:13px;line-height:1.65;color:var(--color-text-primary);margin-bottom:10px}
+.ibox{background:var(--color-background-info);border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:var(--color-text-info);margin-bottom:10px;line-height:1.55}
+.wbox{background:var(--color-background-warning);border:0.5px solid var(--color-border-warning);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:var(--color-text-warning);margin-bottom:10px;line-height:1.55}
+.gbox{background:var(--color-background-success);border:0.5px solid var(--color-border-success);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:var(--color-text-success);margin-bottom:10px;line-height:1.55}
+.dbox{background:var(--color-background-danger);border:0.5px solid var(--color-border-danger);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:var(--color-text-danger);margin-bottom:10px;line-height:1.55}
+.pbox{background:#fdf4ff;border:0.5px solid #e9d5ff;border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:#6b21a8;margin-bottom:10px;line-height:1.55}
+.box-lbl{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;display:block}
+.flbl{font-size:12.5px;font-weight:500;color:var(--color-text-secondary);margin-top:10px;margin-bottom:4px;display:block}
+input[type=text],select,textarea{width:100%;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:7px 10px;font-size:13px;color:var(--color-text-primary);background:var(--color-background-primary);font-family:var(--font-sans)}
+textarea{min-height:60px;resize:vertical}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.r3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.btns{display:flex;gap:7px;flex-wrap:wrap;margin-top:7px}
+.btn{padding:6px 13px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:var(--color-background-primary);cursor:pointer;font-size:12.5px;color:var(--color-text-primary);transition:.15s;white-space:nowrap;font-family:var(--font-sans)}
+.btn:hover{background:var(--color-background-secondary)}
+.btn.on{background:#fef2f2;border-color:#c0392b;color:#c0392b;font-weight:500}
+.btn.pri{background:#c0392b;color:#fff;border-color:#c0392b;font-weight:500}
+.btn.pri:hover{background:#991b1b}
+.btn.sec{background:var(--color-background-primary);color:var(--color-text-secondary);border-color:var(--color-border-secondary)}
+.cnt-row{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.cnt-row:last-child{border-bottom:none}
+.cnt-l{flex:1;font-size:12.5px;color:var(--color-text-primary);line-height:1.4}
+.cnt-n{font-size:11px;color:var(--color-text-secondary);display:block;margin-top:1px}
+.cnt-c{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.cb{width:26px;height:26px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:var(--color-background-primary);cursor:pointer;font-size:16px;color:var(--color-text-primary);display:flex;align-items:center;justify-content:center;line-height:1}
+.cb:hover{background:var(--color-background-secondary)}
+.cv{font-size:14px;font-weight:500;min-width:20px;text-align:center;color:var(--color-text-primary)}
+.asum{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;margin-bottom:10px;border:0.5px solid var(--color-border-tertiary)}
+.al{display:flex;justify-content:space-between;padding:3px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12.5px}
+.al:last-child{border-bottom:none}
+.sum-tbl{width:100%;font-size:12.5px;border-collapse:collapse}
+.sum-tbl td{padding:5px 4px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;color:var(--color-text-primary)}
+.sum-tbl td:first-child{color:var(--color-text-secondary);width:40%;font-weight:500}
+hr.div{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:12px 0}
+.zip-ok{background:#f0fdf4;border:0.5px solid #86efac;border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:#166534;margin:8px 0}
+.zip-no{background:#fef2f2;border:0.5px solid #fca5a5;border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:#7f1d1d;margin:8px 0}
+.zip-ap{background:#fffbeb;border:0.5px solid #fde68a;border-radius:var(--border-radius-md);padding:9px 12px;font-size:12.5px;color:#78350f;margin:8px 0}
+.step-hdr{background:#121b35;border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:12px}
+.step-hdr .sn{font-size:10px;color:#94a3b8;letter-spacing:.08em;text-transform:uppercase}
+.step-hdr h2{color:#fff;font-size:16px;font-weight:500;margin-top:2px}
+.step-hdr p{color:#cbd5e1;font-size:12px;margin-top:3px}
+.nhi{background:#fef2f2;border:0.5px solid #fecaca;border-radius:4px;padding:1px 7px;font-style:normal;font-weight:500;color:#c0392b}
+.sec-t{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-secondary);margin-bottom:8px;margin-top:4px}
+.note{font-size:11px;color:var(--color-text-secondary);line-height:1.5;margin-top:3px}
+.tone-bar{background:#121b35;border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:12px}
+.tone-bar p{color:#cbd5e1;font-size:12.5px;line-height:1.6;margin-top:3px}
+.tone-bar strong{color:#fff;font-size:13px;display:block;margin-bottom:2px}
+.win-tbl{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+.win-tbl th{background:#121b35;color:#fff;padding:7px 8px;text-align:left;font-weight:500}
+.win-tbl td{padding:6px 8px;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-primary)}
+.win-tbl tr:nth-child(even) td{background:var(--color-background-secondary)}
+.win-tbl td:first-child{font-weight:500;color:#c0392b}
+.win-tbl td em{color:var(--color-text-secondary);font-size:11px}
+</style>
+
+<div class="cf">
+
+<div class="hdr">
+  <div class="hdr-logo">
+    <i class="ti ti-droplet" style="font-size:20px;color:#3b82f6" aria-hidden="true"></i>
+    <span><em>Oxi</em> Fresh</span>
+  </div>
+  <div class="hdr-text">
+    <h1>Call Flow Guide</h1>
+    <p>Inbound inquiry &middot; Agent assistant</p>
+  </div>
+  <div class="agent-row">
+    <label>Agent:</label>
+    <input type="text" id="agentIn" placeholder="Your name" oninput="S.agent=this.value;var e=document.getElementById('sn');if(e)e.textContent=this.value||'[Your Name]'">
+  </div>
+  <button class="new-btn" onclick="resetAll()"><i class="ti ti-refresh" aria-hidden="true"></i> New call</button>
+</div>
+
+<div class="prog" id="prog"></div>
+<div id="flow"></div>
+</div>
+
+<script>
+var SNAMES=['Greeting','Service','ZIP','Details','Condition','Quote','Schedule','Closing'];
+
+var ZONES={
+  '32259':1,'32095':1,'32092':1,'32080':1,'32085':1,'32131':1,'32086':1,'32033':1,'32084':1,'32145':1,'32223':1,'32257':1,'32258':1,
+  '32003':2,'32065':2,'32073':2,'32043':2,'32068':2,'32063':2,'32212':2,'32234':2,'32220':2,'32221':2,'32210':2,'32222':2,'32244':2,'32205':2,'32204':2,'32254':2,'32202':2,'32206':2,'32209':2,
+  '32266':3,'32233':3,'32225':3,'32207':3,'32277':3,'32246':3,'32216':3,'32227':3,'32211':3,'32228':3,'32081':3,'32082':3,'32217':3,'32224':3,'32250':3,'32256':3,
+  '32009':4,'32226':4,'32218':4,'32219':4,'32046':4,'32034':4,'32011':4,'32097':4,'32208':4
+};
+var PUTNAM=['32091','32656','32666','32140','32148','32177'];
+
+function zipChk(z){
+  if(!z)return null;
+  if(PUTNAM.indexOf(z)>-1)return'approval';
+  if(ZONES[z])return'ok';
+  return'no';
+}
+
+var S={
+  step:0,agent:'',
+  fname:'',lname:'',concern:'',howHeard:'',isRepeat:null,
+  zip:'',zipRes:null,
+  service:'',
+  carpet:{rooms:0,lshape:0,combo:0,stairs:0,sland:0,halls:0,wic:0,misc:0},
+  uph:{ls:0,sofa:0,sect:0,fabric:''},
+  tile:{sqft:'',know:null},lam:{sqft:'',know:null},comm:{sqft:'',know:null},
+  cond:'',spots:null,spotD:'',rugs:'',furniture:'',oos:'',
+  quote:'',payment:'',
+  address:'',unit:'',city:'',state:'FL',zipAddr:'',
+  phone:'',email:'',date:'',jobPos:'',sysTime:'',window:'',notes:''
+};
+
+function rp(){
+  var h=SNAMES.map(function(s,i){
+    var c=i<S.step?'done':i===S.step?'active':'';
+    return '<div class="pstep '+c+'" onclick="if('+i+'<='+(S.step)+')go('+i+')" title="'+s+'"><span class="pnum">'+('0'+(i+1)).slice(-2)+'</span>'+s+'</div>';
+  }).join('');
+  document.getElementById('prog').innerHTML=h;
+}
+
+function go(n){S.step=n;render();}
+function next(){S.step++;render();}
+
+function sp(t){return '<div class="slbl"><i class="ti ti-message-circle" aria-hidden="true"></i> Say to customer</div><div class="sbox">'+t+'</div>';}
+function ftip(t){return '<div class="pbox"><span class="box-lbl"><i class="ti ti-heart" aria-hidden="true"></i> Friendly tip</span>'+t+'</div>';}
+function etip(t){return '<div class="wbox"><span class="box-lbl"><i class="ti ti-mood-heart" aria-hidden="true"></i> Empathy cue</span>'+t+'</div>';}
+
+function cnt(lbl,k,s,note){
+  var v=S[k][s]||0;
+  return '<div class="cnt-row"><span class="cnt-l">'+lbl+(note?'<span class="cnt-n">'+note+'</span>':'')+'</span><div class="cnt-c"><button class="cb" onclick="adj(\''+k+'\',\''+s+'\',-1)">&#8722;</button><span class="cv" id="cv-'+k+'-'+s+'">'+v+'</span><button class="cb" onclick="adj(\''+k+'\',\''+s+'\',1)">+</button></div></div>';
+}
+function adj(k,s,d){S[k][s]=Math.max(0,(S[k][s]||0)+d);var e=document.getElementById('cv-'+k+'-'+s);if(e)e.textContent=S[k][s];rSum();}
+
+function areas(){
+  var c=S.carpet,ls=[];
+  if(c.rooms)ls.push({l:'Standard rooms',v:c.rooms});
+  if(c.lshape)ls.push({l:'L-shape rooms (x2)',v:c.lshape});
+  if(c.combo)ls.push({l:'Combo rooms (x2)',v:c.combo});
+  if(c.stairs)ls.push({l:'Stairwells',v:c.stairs});
+  if(c.sland)ls.push({l:'Stairwells w/ landing',v:c.sland});
+  if(c.halls)ls.push({l:'Hallways',v:c.halls});
+  if(c.wic)ls.push({l:'Walk-in closets',v:c.wic});
+  if(c.misc)ls.push({l:'Other areas',v:c.misc});
+  var u=S.uph;
+  if(u.ls)ls.push({l:'Loveseat',v:u.ls});
+  if(u.sofa)ls.push({l:'Sofa',v:u.sofa});
+  if(u.sect)ls.push({l:'Sectional',v:u.sect});
+  if(S.tile.sqft)ls.push({l:'Tile & grout',v:S.tile.sqft+' sqft'});
+  if(S.lam.sqft)ls.push({l:'Laminate/LVP',v:S.lam.sqft+' sqft'});
+  if(S.comm.sqft)ls.push({l:'Commercial carpet',v:S.comm.sqft+' sqft'});
+  return ls;
+}
+
+function rSum(){
+  var el=document.getElementById('asum');
+  if(!el)return;
+  var ls=areas();
+  el.innerHTML=ls.length?ls.map(function(l){return'<div class="al"><span>'+l.l+'</span><span style="font-weight:500">'+l.v+'</span></div>';}).join(''):'<span style="font-size:12px;color:var(--color-text-secondary)">No areas added yet</span>';
+}
+
+function sqftQ(k,lbl){
+  var o=S[k];
+  var h='<div class="sec-t">'+lbl+'</div>';
+  h+='<span class="flbl">Does the customer know the area size?</span>';
+  h+='<div class="btns">';
+  h+='<button class="btn'+(o.know===true?' on':'')+'" onclick="S[\''+k+'\'].know=true;render()"><i class="ti ti-check" aria-hidden="true"></i> Yes — knows sqft</button>';
+  h+='<button class="btn'+(o.know===false?' on':'')+'" onclick="S[\''+k+'\'].know=false;render()"><i class="ti ti-help" aria-hidden="true"></i> Not sure</button>';
+  h+='</div>';
+  if(o.know===true){
+    h+='<span class="flbl">Area in sqft</span><input type="text" placeholder="e.g. 350" value="'+(o.sqft||'')+'" oninput="S[\''+k+'\'].sqft=this.value" style="max-width:160px">';
+    h+='<p class="note"><i class="ti ti-info-circle" aria-hidden="true"></i> Tech confirms on-site — price adjusts up or down if different.</p>';
+  }
+  if(o.know===false){
+    h+='<div class="gbox" style="margin-top:8px"><span class="box-lbl"><i class="ti ti-ruler" aria-hidden="true"></i> Rough estimate OK</span>Ask for a ballpark — tech measures on arrival. Price adjusts up if more, down if less.</div>';
+    h+=sp('"No worries at all! Can you give me a rough idea of the area? Our tech will measure everything when they arrive, so the final price adjusts accordingly — up or down. Fair deal, right?"');
+    h+='<span class="flbl">Customer estimate / notes</span><input type="text" placeholder="e.g. about 200-300 sqft or not sure" value="'+(o.sqft||'')+'" oninput="S[\''+k+'\'].sqft=this.value">';
+  }
+  h+='<hr class="div">';
+  return h;
+}
+
+function calcWindow(){
+  if(!S.sysTime||!S.jobPos||S.jobPos==='1st')return null;
+  var parts=S.sysTime.match(/^(\d+):(\d+)\s*(AM|PM)$/i);
+  if(!parts)return null;
+  var h=parseInt(parts[1]),m=parseInt(parts[2]),ap=parts[3].toUpperCase();
+  if(ap==='PM'&&h!==12)h+=12;
+  if(ap==='AM'&&h===12)h=0;
+  var end1h=(h+1)%24,end2h=(h+2)%24;
+  function fmt(hh,mm){var a=hh>=12?'PM':'AM';var d=hh%12||12;return d+':'+(mm<10?'0':'')+mm+' '+a;}
+  return{start:fmt(h,m),end1:fmt(end1h,m),end2:fmt(end2h,m)};
+}
+
+var render=function(){
+  rp();
+  var f=document.getElementById('flow');
+  if(S.step===0)s0(f);
+  else if(S.step===1)s1(f);
+  else if(S.step===2)s2(f);
+  else if(S.step===3)s3(f);
+  else if(S.step===4)s4(f);
+  else if(S.step===5)s5(f);
+  else if(S.step===6)s6(f);
+  else if(S.step===7)s7(f);
+};
+
+function s0(f){
+  var nm=S.agent||'[Your Name]';
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 01</span><h2><i class="ti ti-phone" aria-hidden="true"></i> Greeting</h2><p>Answer warmly within 3 rings</p></div>';
+  h+='<div class="slbl"><i class="ti ti-message-circle" aria-hidden="true"></i> Opening greeting</div>';
+  h+='<div class="sbox">&ldquo;Thank you for calling Oxi Fresh Carpet Cleaning, this is <span class="nhi" id="sn">'+nm+'</span>! How may I help you today?&rdquo;</div>';
+  h+='<div class="tone-bar"><strong><i class="ti ti-heart" aria-hidden="true"></i> Tone reminder</strong><p>Talk like you\'re chatting with a friend — not reading a script. Small talk builds trust. Match their energy. Empathy first, always.</p></div>';
+  h+='<span class="flbl"><i class="ti ti-user" aria-hidden="true"></i> Customer name</span>';
+  h+=sp('"May I get your name please so I can address you properly?"');
+  h+='<div class="r2">';
+  h+='<div><span class="flbl">First name</span><input type="text" placeholder="First name" value="'+S.fname+'" oninput="S.fname=this.value"></div>';
+  h+='<div><span class="flbl">Last name</span><input type="text" placeholder="Last name (if comfortable)" value="'+S.lname+'" oninput="S.lname=this.value"></div>';
+  h+='</div>';
+  h+='<div class="ibox" style="margin-top:8px"><span class="box-lbl"><i class="ti ti-info-circle" aria-hidden="true"></i> Name protocol</span>If not comfortable with last name: <em>"No worries! May I at least get your first name so I can address you properly throughout our call?"</em><br>Once you have their name — use it! It makes the call feel personal.</div>';
+  h+='<span class="flbl">How did they hear about us?</span>';
+  h+='<div class="btns">';
+  ['Google','Yelp','Referral','Return customer','Nextdoor','Facebook','Mailer','Other'].forEach(function(x){
+    h+='<button class="btn'+(S.howHeard===x?' on':'')+'" onclick="S.howHeard=\''+x+'\';document.querySelectorAll(\'.hw\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\')" class="hw">'+x+'</button>';
+  });
+  h+='</div>';
+  h+='<span class="flbl">First time with us?</span>';
+  h+='<div class="btns" style="margin-bottom:10px">';
+  h+='<button class="btn rt'+(S.isRepeat===false?' on':'')+'" onclick="S.isRepeat=false;document.querySelectorAll(\'.rt\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');render()"><i class="ti ti-star" aria-hidden="true"></i> First time</button>';
+  h+='<button class="btn rt'+(S.isRepeat===true?' on':'')+'" onclick="S.isRepeat=true;document.querySelectorAll(\'.rt\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');render()"><i class="ti ti-heart" aria-hidden="true"></i> Welcome back</button>';
+  h+='</div>';
+  if(S.isRepeat===false)h+=sp('"Awesome, welcome to Oxi Fresh'+(S.fname?' '+S.fname:'')+'! You\'re in the right place — we\'ll take great care of you!"');
+  if(S.isRepeat===true)h+=sp('"Oh, welcome back'+(S.fname?' '+S.fname:'')+'! So great to hear from you again! How has everything been?"');
+  h+='<span class="flbl">Customer concern / request</span>';
+  h+='<textarea placeholder="Note their concern..." oninput="S.concern=this.value">'+S.concern+'</textarea>';
+  h+='<div class="btns" style="margin-top:12px"><button class="btn pri" onclick="next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>';
+  h+='</div>';
+  f.innerHTML=h;
+}
+
+function s1(f){
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 02</span><h2><i class="ti ti-list" aria-hidden="true"></i> Service type</h2><p>Identify what the customer needs</p></div>';
+  h+=sp('"Wonderful'+(S.fname?' '+S.fname:'')+'! So I can get you an accurate quote — what type of service are you looking for today?"');
+  h+=ftip('Feel free to add: "Oh carpet cleaning — perfect timing!" Keep it natural and conversational.');
+  h+='<div class="btns" style="margin-bottom:14px">';
+  [['Carpet cleaning','carpet'],['Upholstery','uph'],['Tile & grout','tile'],['Laminate / LVP','lam'],['Commercial carpet','comm'],['Multiple services','multi']].forEach(function(p){
+    h+='<button class="btn sv'+(S.service===p[1]?' on':'')+'" onclick="document.querySelectorAll(\'.sv\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');S.service=\''+p[1]+'\'">'+p[0]+'</button>';
+  });
+  h+='</div>';
+  h+='<div class="btns"><button class="btn sec" onclick="go(0)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button><button class="btn pri" onclick="if(!S.service){alert(\'Please select a service\')}else next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>';
+  h+='</div>';
+  f.innerHTML=h;
+}
+
+function s2(f){
+  var zr=S.zip?zipChk(S.zip):null;
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 03</span><h2><i class="ti ti-map-pin" aria-hidden="true"></i> ZIP verification</h2><p>Confirm service area before going further</p></div>';
+  h+=sp('"Perfect! May I get your ZIP code so I can confirm we service your area?"');
+  h+='<div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:8px">';
+  h+='<div style="flex:1"><span class="flbl">ZIP code</span><input type="text" id="zipIn" placeholder="e.g. 32256" value="'+S.zip+'" oninput="S.zip=this.value.trim()" style="max-width:160px"></div>';
+  h+='<button class="btn pri" onclick="S.zipRes=zipChk(S.zip);render()"><i class="ti ti-search" aria-hidden="true"></i> Check ZIP</button>';
+  h+='</div>';
+  if(zr==='ok'){
+    h+='<div class="zip-ok"><i class="ti ti-circle-check" aria-hidden="true"></i> <strong>Zone '+ZONES[S.zip]+' — In service area!</strong> Great, let\'s continue.</div>';
+  } else if(zr==='approval'){
+    h+='<div class="zip-ap"><i class="ti ti-alert-triangle" aria-hidden="true"></i> <strong>Putnam County — Approval required.</strong> Do NOT book without manager sign-off.<br><br>';
+    h+=sp('"This area needs a quick approval from our team. Let me take your details and confirm with you very shortly!"');
+    h+='</div>';
+  } else if(zr==='no'){
+    h+='<div class="zip-no"><i class="ti ti-circle-x" aria-hidden="true"></i> <strong>Outside service area.</strong><br><br>';
+    h+=sp('"I\'m so sorry about that'+(S.fname?' '+S.fname:'')+'! Unfortunately that area is outside our current service zone. I totally understand how frustrating that can be!"');
+    h+=etip('Acknowledge the disappointment warmly. Offer to check if a partner company serves their area.');
+    h+='</div>';
+    h+='<div class="ibox"><span class="box-lbl"><i class="ti ti-map" aria-hidden="true"></i> Service zones</span>Zone 1: St Augustine / South Jax &nbsp;&bull;&nbsp; Zone 2: Orange Park / Middleburg / Downtown Jax<br>Zone 3: Beaches / SE Jacksonville &nbsp;&bull;&nbsp; Zone 4: Nassau / NW Jax &nbsp;&bull;&nbsp; Putnam = approval needed</div>';
+  }
+  h+='<div class="btns" style="margin-top:10px"><button class="btn sec" onclick="go(1)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button>';
+  if(zr==='ok'||zr==='approval')h+='<button class="btn pri" onclick="next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button>';
+  h+='</div></div>';
+  f.innerHTML=h;
+}
+
+function s3(f){
+  var sv=S.service;
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 04</span><h2><i class="ti ti-clipboard-list" aria-hidden="true"></i> Service details</h2><p>Gather all area and item details for quoting</p></div>';
+  h+='<div class="tone-bar"><strong><i class="ti ti-message" aria-hidden="true"></i> Small talk while gathering info</strong><p>Keep it conversational! Try: "Are you cleaning for a special occasion?" or "How long have you had that sofa?" These moments build trust.</p></div>';
+  if(sv==='carpet'||sv==='multi'){
+    h+='<div class="sec-t"><i class="ti ti-home" aria-hidden="true"></i> Carpet cleaning areas</div>';
+    h+='<div class="ibox"><span class="box-lbl"><i class="ti ti-ruler" aria-hidden="true"></i> Area rules</span>L-shape = 2 areas &nbsp;&bull;&nbsp; Combo room = 2 areas &nbsp;&bull;&nbsp; Over ~250 sqft (2-car garage) = 2 areas &nbsp;&bull;&nbsp; Stairwell with landing = +1 area</div>';
+    h+=cnt('Standard rooms','carpet','rooms');
+    h+=cnt('L-shape rooms','carpet','lshape','Each = 2 areas');
+    h+=cnt('Combination rooms','carpet','combo','Each = 2 areas');
+    h+=cnt('Stairwells','carpet','stairs','Ask: does it have a landing?');
+    h+=cnt('Stairwells with landing','carpet','sland','Landing = +1 area');
+    h+=cnt('Hallways','carpet','halls');
+    h+=cnt('Walk-in closets (WIC)','carpet','wic');
+    h+=cnt('Other carpeted areas','carpet','misc');
+    h+='<hr class="div">';
+  }
+  if(sv==='uph'||sv==='multi'){
+    h+='<div class="sec-t"><i class="ti ti-sofa" aria-hidden="true"></i> Upholstery</div>';
+    h+=cnt('Loveseat (2-seater)','uph','ls');
+    h+=cnt('Sofa (3-seater)','uph','sofa');
+    h+=cnt('Sectional (3+ seaters)','uph','sect');
+    h+='<span class="flbl">Fabric / material</span><input type="text" placeholder="e.g. microfiber, linen, velvet, leather..." value="'+S.uph.fabric+'" oninput="S.uph.fabric=this.value">';
+    h+='<div class="wbox" style="margin-top:8px"><span class="box-lbl"><i class="ti ti-alert-triangle" aria-hidden="true"></i> Fabric check</span>Verify material is compatible. Delicate or blended = possible damage waiver. If NOT cleanable — offer partner referral.</div>';
+    h+='<hr class="div">';
+  }
+  if(sv==='tile'||sv==='multi')h+=sqftQ('tile','Tile & grout');
+  if(sv==='lam'||sv==='multi')h+=sqftQ('lam','Laminate / LVP');
+  if(sv==='comm'||sv==='multi')h+=sqftQ('comm','Commercial carpet');
+  h+='<div class="sec-t"><i class="ti ti-list-check" aria-hidden="true"></i> Area summary</div>';
+  h+='<div class="asum" id="asum"><span style="font-size:12px;color:var(--color-text-secondary)">No areas added yet</span></div>';
+  h+='<div class="sec-t"><i class="ti ti-alert-circle" aria-hidden="true"></i> Out-of-scope / referral</div>';
+  h+='<div class="dbox"><span class="box-lbl"><i class="ti ti-share" aria-hidden="true"></i> Protocol</span>If not cleanable or out of scope:<br>1. Let customer know warmly &nbsp;2. Offer trusted partner referral &nbsp;3. Ask consent to share their details<br>If YES: log details + notify partner. If NO: give partner name/# to customer + notify partner of possible lead.</div>';
+  h+='<span class="flbl">Out-of-scope notes / referral log</span>';
+  h+='<textarea placeholder="Describe item, referral action, customer consent..." oninput="S.oos=this.value">'+S.oos+'</textarea>';
+  h+='<div class="btns" style="margin-top:12px"><button class="btn sec" onclick="go(2)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button><button class="btn pri" onclick="next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>';
+  h+='</div>';
+  f.innerHTML=h;
+  rSum();
+}
+
+function s4(f){
+  var nm=S.fname||'them';
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 05</span><h2><i class="ti ti-eye" aria-hidden="true"></i> Condition assessment</h2><p>Set proper expectations before quoting</p></div>';
+  h+=sp('"Just a few quick questions about the condition so our tech is fully prepared — won\'t take a sec!"');
+  h+=etip('If customer sounds embarrassed: "No worries at all! Our techs have seen everything — there\'s nothing they can\'t tackle!"');
+  h+='<div class="sec-t">Overall condition</div>';
+  h+='<div class="btns" style="margin-bottom:12px">';
+  [['Mild (light soil)','mild'],['Moderate (normal wear)','mod'],['Severe (heavy soiling)','severe']].forEach(function(p){
+    h+='<button class="btn co'+(S.cond===p[1]?' on':'')+'" onclick="document.querySelectorAll(\'.co\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');S.cond=\''+p[1]+'\'">'+p[0]+'</button>';
+  });
+  h+='</div>';
+  h+='<span class="flbl">Any spots, stains, or dye?</span>';
+  h+='<div class="btns" style="margin-bottom:8px">';
+  h+='<button class="btn sp'+(S.spots===true?' on':'')+'" onclick="S.spots=true;document.querySelectorAll(\'.sp\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');var d=document.getElementById(\'spd\');d.style.opacity=\'1\';d.style.pointerEvents=\'\'"><i class="ti ti-check" aria-hidden="true"></i> Yes</button>';
+  h+='<button class="btn sp'+(S.spots===false?' on':'')+'" onclick="S.spots=false;document.querySelectorAll(\'.sp\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');var d=document.getElementById(\'spd\');d.style.opacity=\'.4\';d.style.pointerEvents=\'none\'"><i class="ti ti-x" aria-hidden="true"></i> No</button>';
+  h+='</div>';
+  h+='<div id="spd" style="opacity:'+(S.spots?'1':'.4')+';pointer-events:'+(S.spots?'':'none')+';margin-bottom:10px">';
+  h+='<span class="flbl">Spot / stain details</span><input type="text" placeholder="e.g. pet urine, wine, ink, dye, bleach..." value="'+S.spotD+'" oninput="S.spotD=this.value">';
+  h+='</div>';
+  h+='<div class="wbox"><span class="box-lbl"><i class="ti ti-plus" aria-hidden="true"></i> Treatment add-on</span><strong>$35 per area / per treatment</strong> — tech assesses on day of service. Optional but recommended for tough conditions.</div>';
+  h+=sp('"Just so you know — our tech will do a full walk-through when they arrive. If they see areas that need treatment, they\'ll recommend it at $35 per area. Totally your call — no pressure! But it really makes a difference."');
+  h+='<span class="flbl">Area rugs? (material)</span>';
+  h+='<input type="text" placeholder="e.g. wool blend, synthetic, oriental, none..." value="'+S.rugs+'" oninput="S.rugs=this.value">';
+  h+='<p class="note"><i class="ti ti-info-circle" aria-hidden="true"></i> Blended / non-cleanable: tech advises damage waiver on day of service.</p>';
+  h+='<span class="flbl">Furniture fabric / material</span>';
+  h+='<input type="text" placeholder="e.g. microfiber, velvet, linen — verify compatibility" value="'+S.furniture+'" oninput="S.furniture=this.value">';
+  h+='<div class="btns" style="margin-top:12px"><button class="btn sec" onclick="go(3)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button><button class="btn pri" onclick="next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>';
+  h+='</div>';
+  f.innerHTML=h;
+}
+
+function s5(f){
+  var ls=areas();
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 06</span><h2><i class="ti ti-receipt" aria-hidden="true"></i> Quote</h2><p>Pull CRM, provide quote, confirm payment</p></div>';
+  h+='<div class="sec-t"><i class="ti ti-list-check" aria-hidden="true"></i> Service recap</div>';
+  h+='<div class="asum">'+(ls.length?ls.map(function(l){return'<div class="al"><span>'+l.l+'</span><span style="font-weight:500">'+l.v+'</span></div>';}).join(''):'<span style="font-size:12px;color:var(--color-text-secondary)">No items — go back to add details</span>')+'</div>';
+  h+='<div class="gbox"><span class="box-lbl"><i class="ti ti-database" aria-hidden="true"></i> CRM step</span>Pull up the CRM with all details above and generate the quote amount, then share with the customer.</div>';
+  h+=sp('"Based on everything you\'ve shared'+(S.fname?', '+S.fname:'')+', your total today would be [AMOUNT FROM CRM]. Our tech will also confirm measurements on-site — price adjusts if areas differ."');
+  h+='<span class="flbl">Quote amount (from CRM)</span>';
+  h+='<input type="text" placeholder="e.g. $185" value="'+S.quote+'" oninput="S.quote=this.value" style="max-width:180px;margin-bottom:10px">';
+  h+='<div class="ibox"><span class="box-lbl"><i class="ti ti-credit-card" aria-hidden="true"></i> Payment</span>We accept <strong>cash and card only</strong> — no checks.</div>';
+  h+='<span class="flbl">Payment preference</span>';
+  h+='<div class="btns" style="margin-bottom:14px">';
+  ['Cash','Card'].forEach(function(p){
+    h+='<button class="btn pa'+(S.payment===p?' on':'')+'" onclick="document.querySelectorAll(\'.pa\').forEach(function(b){b.classList.remove(\'on\')});this.classList.add(\'on\');S.payment=\''+p+'\'">'+p+'</button>';
+  });
+  h+='</div>';
+  h+='<div class="btns"><button class="btn sec" onclick="go(4)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button><button class="btn pri" onclick="next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>';
+  h+='</div>';
+  f.innerHTML=h;
+}
+
+function s6(f){
+  var win=calcWindow();
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 07</span><h2><i class="ti ti-calendar" aria-hidden="true"></i> Scheduling</h2><p>Confirm full contact info, address, date and arrival window</p></div>';
+  h+=sp('"Awesome! Let\'s get you on the schedule. May I get your complete service address?"');
+  h+=ftip('Great moment for small talk — "Oh, are you in [neighborhood]? We love that area!" or "Any big plans after the cleaning?"');
+
+  h+='<div class="sec-t"><i class="ti ti-user" aria-hidden="true"></i> Confirm customer details</div>';
+  h+='<div class="r2">';
+  h+='<div><span class="flbl">First name</span><input type="text" placeholder="First name" value="'+S.fname+'" oninput="S.fname=this.value"></div>';
+  h+='<div><span class="flbl">Last name</span><input type="text" placeholder="Last name" value="'+S.lname+'" oninput="S.lname=this.value"></div>';
+  h+='</div>';
+  h+='<div class="ibox" style="margin-top:8px"><span class="box-lbl"><i class="ti ti-info-circle" aria-hidden="true"></i> Name check</span>If last name wasn\'t given earlier: "May I get your last name for the booking?"<br>Still not comfortable? That\'s OK — first name only is fine.</div>';
+  h+=sp('"May I also confirm your best contact number'+(S.fname?', '+S.fname:'')+'? Our tech will call or text before heading your way!"');
+  h+='<span class="flbl"><i class="ti ti-phone" aria-hidden="true"></i> Best contact number</span>';
+  h+='<input type="text" placeholder="e.g. (904) 555-0123" value="'+S.phone+'" oninput="S.phone=this.value" style="max-width:220px;margin-bottom:8px">';
+  h+=sp('"Could I also grab your email address? We\'d love to send you a booking confirmation!"');
+  h+='<span class="flbl"><i class="ti ti-mail" aria-hidden="true"></i> Email address</span>';
+  h+='<input type="text" placeholder="e.g. name@email.com" value="'+S.email+'" oninput="S.email=this.value" style="margin-bottom:4px">';
+  h+='<p class="note"><i class="ti ti-info-circle" aria-hidden="true"></i> If not comfortable: "No problem! We\'ll confirm everything by phone."</p>';
+
+  h+='<hr class="div">';
+  h+='<div class="sec-t"><i class="ti ti-home" aria-hidden="true"></i> Service address</div>';
+  h+='<span class="flbl">Street address</span><input type="text" placeholder="Street address" value="'+S.address+'" oninput="S.address=this.value">';
+  h+='<div class="r3" style="margin-top:8px">';
+  h+='<div><span class="flbl">Unit / Apt #</span><input type="text" placeholder="Unit # if applicable" value="'+S.unit+'" oninput="S.unit=this.value"></div>';
+  h+='<div><span class="flbl">City</span><input type="text" placeholder="City" value="'+S.city+'" oninput="S.city=this.value"></div>';
+  h+='<div><span class="flbl">ZIP code</span><input type="text" placeholder="ZIP" value="'+S.zipAddr+'" oninput="S.zipAddr=this.value"></div>';
+  h+='</div>';
+
+  h+='<hr class="div">';
+  h+='<div class="sec-t"><i class="ti ti-clock" aria-hidden="true"></i> Scheduling & arrival window</div>';
+  h+='<div class="r2" style="margin-bottom:10px">';
+  h+='<div><span class="flbl">Preferred date</span><input type="text" placeholder="e.g. Monday June 30" value="'+S.date+'" oninput="S.date=this.value"></div>';
+  h+='<div><span class="flbl">Job position on tech\'s route</span>';
+  h+='<select onchange="S.jobPos=this.value;render()">';
+  h+='<option value="">-- Select --</option>';
+  h+='<option value="1st"'+(S.jobPos==='1st'?' selected':'')+'>1st job of the day</option>';
+  h+='<option value="2nd"'+(S.jobPos==='2nd'?' selected':'')+'>2nd job</option>';
+  h+='<option value="3rd"'+(S.jobPos==='3rd'?' selected':'')+'>3rd job</option>';
+  h+='<option value="4th"'+(S.jobPos==='4th'?' selected':'')+'>4th job</option>';
+  h+='</select></div>';
+  h+='</div>';
+
+  if(S.jobPos==='1st'){
+    h+='<div class="gbox"><span class="box-lbl"><i class="ti ti-sun" aria-hidden="true"></i> 1st job — exact time OK</span>First job of the day starts fresh. You may give the customer an exact time: <strong>9:00 AM</strong>.</div>';
+    h+=sp('"Your appointment is at 9:00 AM'+(S.fname?', '+S.fname:'')+'! Our tech will be there bright and early!"');
+    h+='<span class="flbl">Confirm time</span><input type="text" value="9:00 AM" oninput="S.window=this.value" style="max-width:160px">';
+  } else if(S.jobPos==='2nd'||S.jobPos==='3rd'||S.jobPos==='4th'){
+    h+='<div class="wbox"><span class="box-lbl"><i class="ti ti-alert-triangle" aria-hidden="true"></i> '+S.jobPos+' job — window required</span>Always give a 1–2 hour arrival window. Never a fixed time for 2nd, 3rd, or 4th jobs.</div>';
+    h+='<span class="flbl">Scheduled time in CRM system</span>';
+    h+='<div style="display:flex;gap:8px;align-items:flex-end">';
+    h+='<input type="text" id="sysTimeIn" placeholder="e.g. 11:00 AM" value="'+S.sysTime+'" oninput="S.sysTime=this.value" style="max-width:140px">';
+    h+='<button class="btn pri" onclick="S.sysTime=document.getElementById(\'sysTimeIn\').value;render()"><i class="ti ti-calculator" aria-hidden="true"></i> Calculate window</button>';
+    h+='</div>';
+    if(win){
+      h+='<div class="ibox" style="margin-top:8px"><span class="box-lbl"><i class="ti ti-clock" aria-hidden="true"></i> Arrival window options</span>';
+      h+='<strong>1-hour window:</strong> '+win.start+' &ndash; '+win.end1+'<br>';
+      h+='<strong>2-hour window:</strong> '+win.start+' &ndash; '+win.end2;
+      h+='<p style="margin-top:6px;font-size:11.5px">Use the 2-hour window if the job before this one is larger or may run long.</p>';
+      h+='</div>';
+      h+=sp('"We have you scheduled for '+(S.date||'[date]')+'! Since your appointment is at '+win.start+' and it\'s our tech\'s '+S.jobPos+' job of the day, your arrival window will be between '+win.start+' and '+win.end1+' (or up to '+win.end2+'). Carpet cleaning jobs can vary depending on the size and condition of each home — we provide a window so every customer gets the proper attention they deserve. Our tech will also call or text you before heading your way, so you\'ll always know when to expect them!"');
+    }
+    h+='<span class="flbl">Arrival window to confirm</span>';
+    h+='<input type="text" placeholder='+(win?'"e.g. '+win.start+' – '+win.end1+'"':'"e.g. 11:00 AM – 12:00 PM"')+' value="'+S.window+'" oninput="S.window=this.value" style="max-width:240px">';
+  } else if(S.jobPos){
+    h+='';
+  }
+
+  h+='<hr class="div">';
+  h+='<span class="flbl"><i class="ti ti-notes" aria-hidden="true"></i> Special instructions for tech</span>';
+  h+='<textarea placeholder="Gate code, pets inside, parking info, call before arriving, access notes..." oninput="S.notes=this.value">'+S.notes+'</textarea>';
+  h+='<div class="btns" style="margin-top:12px"><button class="btn sec" onclick="go(5)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button><button class="btn pri" onclick="next()">Continue <i class="ti ti-arrow-right" aria-hidden="true"></i></button></div>';
+  h+='</div>';
+  f.innerHTML=h;
+}
+
+function s7(f){
+  var ls=areas();
+  var nm=(S.fname||'')+(S.lname?' '+S.lname:'');
+  var addr=[S.address,S.unit,S.city,S.state,S.zipAddr].filter(Boolean).join(', ');
+  var h='<div class="card card-red">';
+  h+='<div class="step-hdr"><span class="sn">Step 08</span><h2><i class="ti ti-circle-check" aria-hidden="true"></i> Closing</h2><p>Confirm all details and end the call warmly</p></div>';
+  h+='<div class="sec-t"><i class="ti ti-clipboard" aria-hidden="true"></i> Booking summary</div>';
+  h+='<table class="sum-tbl" style="margin-bottom:12px">';
+  h+='<tr><td><i class="ti ti-user" style="font-size:13px" aria-hidden="true"></i> Agent</td><td>'+(S.agent||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-id" style="font-size:13px" aria-hidden="true"></i> Customer name</td><td>'+(nm||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-phone" style="font-size:13px" aria-hidden="true"></i> Contact number</td><td>'+(S.phone||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-mail" style="font-size:13px" aria-hidden="true"></i> Email</td><td>'+(S.email||'Not provided')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-tag" style="font-size:13px" aria-hidden="true"></i> Source</td><td>'+(S.howHeard||'—')+' &middot; '+(S.isRepeat===true?'Returning':'First time')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-map-pin" style="font-size:13px" aria-hidden="true"></i> ZIP / Zone</td><td>'+(S.zip||'—')+(ZONES[S.zip]?' (Zone '+ZONES[S.zip]+')':PUTNAM.indexOf(S.zip)>-1?' (Putnam - approval)':'')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-list" style="font-size:13px" aria-hidden="true"></i> Service</td><td>'+(S.service||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-layers" style="font-size:13px" aria-hidden="true"></i> Areas / items</td><td>'+(ls.length?ls.map(function(l){return l.l+': '+l.v;}).join(' &bull; '):'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-eye" style="font-size:13px" aria-hidden="true"></i> Condition</td><td>'+(S.cond||'—')+(S.spots?' &bull; Spots: '+S.spotD:'')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-receipt" style="font-size:13px" aria-hidden="true"></i> Quote (CRM)</td><td style="font-weight:500">'+(S.quote||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-credit-card" style="font-size:13px" aria-hidden="true"></i> Payment</td><td>'+(S.payment||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-home" style="font-size:13px" aria-hidden="true"></i> Address</td><td>'+(addr||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-calendar" style="font-size:13px" aria-hidden="true"></i> Date</td><td>'+(S.date||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-clock" style="font-size:13px" aria-hidden="true"></i> Arrival window</td><td>'+(S.window||'—')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-notes" style="font-size:13px" aria-hidden="true"></i> Instructions</td><td>'+(S.notes||'None')+'</td></tr>';
+  h+='<tr><td><i class="ti ti-share" style="font-size:13px" aria-hidden="true"></i> OOS / referral</td><td>'+(S.oos||'None')+'</td></tr>';
+  h+='</table>';
+  h+=sp('"Perfect — you\'re all set'+(S.fname?', '+S.fname:'')+'! Our technician will arrive on '+(S.date||'[date]')+' '+(S.window?'between '+S.window:'at your scheduled time')+'. They\'ll give you a heads up before heading your way. Is there anything else I can help you with today?"');
+  h+='<div class="slbl" style="margin-top:12px"><i class="ti ti-message" aria-hidden="true"></i> Closing spiel</div>';
+  h+='<div class="sbox">&ldquo;Thank you so much for choosing Oxi Fresh Carpet Cleaning — we really appreciate it'+(S.fname?', '+S.fname:'')+'! We\'re looking forward to seeing you on '+(S.date||'[date]')+'! Have a wonderful day — take care!&rdquo;</div>';
+  h+=ftip('End with the same warm energy you started with! A cheerful goodbye leaves a lasting impression — they may just leave a 5-star review!');
+  h+='<div class="gbox"><span class="box-lbl"><i class="ti ti-checklist" aria-hidden="true"></i> Before hanging up — checklist</span>';
+  var chk=[
+    'Full name (first & last) confirmed on booking',
+    'Best contact number logged',
+    'Email captured (or noted as not provided)',
+    'Complete service address confirmed with unit number',
+    'Tech notes logged (instructions, access, pets)',
+    'Damage waiver noted if applicable',
+    'Referral action logged if out-of-scope',
+    'Arrival window communicated clearly',
+    'CRM booking confirmed'
+  ];
+  h+=chk.map(function(c){return'<label style="display:flex;align-items:center;gap:7px;margin-top:5px;font-size:12.5px;cursor:pointer"><input type="checkbox" style="width:15px;height:15px"> '+c+'</label>';}).join('');
+  h+='</div>';
+  h+='<div class="btns" style="margin-top:12px">';
+  h+='<button class="btn sec" onclick="go(6)"><i class="ti ti-arrow-left" aria-hidden="true"></i> Back</button>';
+  h+='<button class="btn pri" onclick="alert(\'Call logged! Ready for the next one! \')"><i class="ti ti-check" aria-hidden="true"></i> Log & close call</button>';
+  h+='<button class="btn sec" onclick="resetAll()"><i class="ti ti-refresh" aria-hidden="true"></i> New call</button>';
+  h+='</div>';
+  h+='</div>';
+  f.innerHTML=h;
+}
+
+function resetAll(){
+  var ag=S.agent;
+  S={step:0,agent:ag,
+    fname:'',lname:'',concern:'',howHeard:'',isRepeat:null,
+    zip:'',zipRes:null,service:'',
+    carpet:{rooms:0,lshape:0,combo:0,stairs:0,sland:0,halls:0,wic:0,misc:0},
+    uph:{ls:0,sofa:0,sect:0,fabric:''},
+    tile:{sqft:'',know:null},lam:{sqft:'',know:null},comm:{sqft:'',know:null},
+    cond:'',spots:null,spotD:'',rugs:'',furniture:'',oos:'',
+    quote:'',payment:'',
+    address:'',unit:'',city:'',state:'FL',zipAddr:'',
+    phone:'',email:'',date:'',jobPos:'',sysTime:'',window:'',notes:''};
+  render();
+}
+
+render();
+</script>
